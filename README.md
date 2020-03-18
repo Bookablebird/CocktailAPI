@@ -1,18 +1,18 @@
 # CocktailAPI
 Request & Response Examples
 
-##GET /Cocktails
+## GET /Cocktails
 
-##GET /Cocktails/[id]
+## GET /Cocktails/[id]
 
-##POST /Cocktails
+## POST /Cocktails
 
-##PUT /Cocktails/[id]
+## PUT /Cocktails/[id]
 
-##DELETE /Cocktails/[id]
+## DELETE /Cocktails/[id]
 
 
-##GET /Cocktails
+## GET /Cocktails
 Example: http://localhost:3000/Cocktails
 
 Response body:
@@ -67,7 +67,7 @@ Response body:
         ],
         "__v": 0
     }
-##GET /Cocktails/[id]
+## GET /Cocktails/[id]
 Example: http://localhost:3000/Cocktails/5e69393fc988e448883e18c4
 
 Response body:
@@ -122,7 +122,7 @@ Response body:
     ],
     "__v": 0
 }
-##POST /Cocktails/
+## POST /Cocktails/
 Example: Create – POST http://localhost:3000/Cocktails/nimi=testi&kuvanimi=testi&ohje=testi&ainesosat[ainesosa1][mitä]=testi&ainesosat[ainesosa1][määrä]=100&ainesosat[ainesosa1][mitta]=ml
 
 Request body:
@@ -157,7 +157,7 @@ Request body:
         "__v": 0
     }
     
-    ##PUT /Cocktails/[id]
+    ## PUT /Cocktails/[id]
     Example: http://localhost:3000/Cocktails/5e69393fc988e448883e18c4?nimi=testi1&ohje=Sekoita hyvin
     
     Request body:
@@ -192,7 +192,7 @@ Request body:
         "__v": 0
     }
     
-    ##DELETE /Cocktails/[id]
+    ## DELETE /Cocktails/[id]
     
     Example: http://localhost:3000/Cocktails/5e69393fc988e448883e18c4
     
