@@ -1,10 +1,16 @@
 # CocktailAPI
 Request & Response Examples
-GET /Cocktails
-GET /Cocktails/[id]
-POST /Cocktails
-PUT /Cocktails/[id]
-DELETE /Cocktails/[id]
+
+##GET /Cocktails
+
+##GET /Cocktails/[id]
+
+##POST /Cocktails
+
+##PUT /Cocktails/[id]
+
+##DELETE /Cocktails/[id]
+
 
 ##GET /Cocktails
 Example: http://localhost:3000/Cocktails
