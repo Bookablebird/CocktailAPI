@@ -2,17 +2,6 @@
 Request & Response Examples
 
 ## GET /Cocktails
-
-## GET /Cocktails/[id]
-
-## POST /Cocktails
-
-## PUT /Cocktails/[id]
-
-## DELETE /Cocktails/[id]
-
-
-## GET /Cocktails
 Example: http://localhost:3000/Cocktails
 
 Response body:
@@ -157,10 +146,10 @@ Request body:
         "__v": 0
     }
     
-    ## PUT /Cocktails/[id]
-    Example: http://localhost:3000/Cocktails/5e69393fc988e448883e18c4?nimi=testi1&ohje=Sekoita hyvin
+## PUT /Cocktails/[id]
+Example: http://localhost:3000/Cocktails/5e69393fc988e448883e18c4?nimi=testi1&ohje=Sekoita hyvin
     
-    Request body:
+Request body:
 
 {
         "_id": "5e691bfec988e448883e18c",
@@ -192,11 +181,11 @@ Request body:
         "__v": 0
     }
     
-    ## DELETE /Cocktails/[id]
+## DELETE /Cocktails/[id]
     
-    Example: http://localhost:3000/Cocktails/5e69393fc988e448883e18c4
+Example: http://localhost:3000/Cocktails/5e69393fc988e448883e18c4
     
-    Response body:
+Response body:
 
 {
     "message": "Cocktail successfully deleted"
