@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cocktail UI</title>
+    <style>
+        body {
+            background-color: linen;
+            padding-top: 3%;
+            margin: 0;
+        }
+        ul{
+            background-color: gainsboro;
+            width: 300px;
+            height: 370px;
+            float: left;
+            margin: 30px 10px 0px 50px;
+            border: 0.8px outset lightgray;
+            border-radius: 7px;
+            padding-top: 15px;
+            padding-right: 40px;
+            font-family: "Calibri";
+        }
+        .container{
+            position: absolute;
+            right: 10px;
+            top: 30px;
+            text-align: center;
+        }
+        #button{
+            padding: 24px 44px;
+            background: lightgray;
+            font-weight: bolder;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        #post{
+            padding: 20px 35px;
+            background: gainsboro;
+            font-weight: bolder;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: 0.4s;
+            text-decoration: none;
+        }
+        #delete{
+            padding: 20px 35px;
+            background: lightcoral;
+            font-weight: bolder;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: 0.4s;
+            text-decoration: none;
+        }
+        #put{
+            padding: 20px 35px;
+            background: chartreuse;
+            font-weight: bolder;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: 0.4s;
+            text-decoration: none;
+        }
+        .button:hover{
+            background: #34495e;
+            color: red;
+        }
+        .popup{
+            background:rgba(0,0,0,0.6) ;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .popup-content{
+            height: 900px;
+            width: 500px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            position: relative;
+        }
+        input{
+            margin: 20px auto;
+            display: block;
+            width: 50%;
+            padding: 8px;
+            border: 1px solid gray;
+        }
+        .close{
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            size: 15px 15px;
+            background: white;
+            border-radius: 60%;
+            cursor: pointer;
+        }
+        li{
+            list-style-type: none;
+            padding: 5px 5px 5px 5px;
+            font-size: 16px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="#" class="button" id="button">Lisää uusi</a>
+</div>
+
+<div class="popup">
+    <div id="popupcontent" class="popup-content">
+        <img src="close.png" id="close" alt="Close" class="close" width="35px" height="35px">
+        <input id="nimi" type="text" placeholder="Juoman nimi">
+        <input id="ohje" type="text" placeholder="Ohje">
+        <input id="kuvannimi" type="text" placeholder="Kuvan nimi">
+        <input id="ainesosa1" type="text" placeholder="Ainesosa 1">
+        <input id="maara1" type="text" placeholder="Määrä">
+        <input id="mitta1" type="text" placeholder="Mitta... esim. ml/cl/dash/ripaus..">
+        <input id="ainesosa2" type="text" placeholder="Ainesosa 2">
+        <input id="maara2" type="text" placeholder="Määrä">
+        <input id="mitta2" type="text" placeholder="Mitta... esim. ml/cl/dash/ripaus..">
+        <input id="ainesosa3" type="text" placeholder="Ainesosa 3">
+        <input id="maara3" type="text" placeholder="Määrä">
+        <input id="mitta3" type="text" placeholder="Mitta... esim. ml/cl/dash/ripaus..">
+        <input id="ainesosa4" type="text" placeholder="Ainesosa 4">
+        <input id="maara4" type="text" placeholder="Määrä">
+        <input id="mitta4" type="text" placeholder="Mitta... esim. ml/cl/dash/ripaus..">
+    </div>
+</div>
+
+<div id="center">
+</div>
+<script>
+    var id;
+
+    var xmlhttp = new XMLHttpRequest();
+    var url = "http://localhost:3000/Cocktails";
+    var myArr;
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            myArr = JSON.parse(xmlhttp.responseText);
+            console.log(myArr);
+            myFunction(myArr);
+        }
+    }
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+
+    document.getElementById("button").addEventListener("click", popuppost);
+
+    document.querySelector(".close").addEventListener("click", function () {
+        document.querySelector(".popup").style.display = "none";
+    })
+
+    function popuppost() {
+        if (document.getElementById("post")){
+            var element = document.getElementById("post");
+            element.parentNode.removeChild(element);
+        }
+        if (document.getElementById("delete")){
+            var element = document.getElementById("delete");
+            element.parentNode.removeChild(element);
+        }
+        if (document.getElementById("put")){
+            var element = document.getElementById("put");
+            element.parentNode.removeChild(element);
+        }
+        var btn = document.createElement("a");
+        btn.setAttribute("class", "button");
+        btn.setAttribute("href", "#");
+        btn.setAttribute("id", "post");
+        btn.setAttribute('onclick','newdrink()');
+        btn.innerHTML = "POST";
+        document.querySelector(".popup").style.display = "flex";
+        document.getElementById("popupcontent").appendChild(btn);
+
+    }
+    function popupdelete() {
+        if (document.getElementById("delete")){
+            var element = document.getElementById("delete");
+            element.parentNode.removeChild(element);
+        }
+        if (document.getElementById("post")){
+            var element = document.getElementById("post");
+            element.parentNode.removeChild(element);
+        }
+        if (document.getElementById("put")){
+            var element = document.getElementById("put");
+            element.parentNode.removeChild(element);
+        }
+        var btn = document.createElement("a");
+        btn.setAttribute("class", "button");
+        btn.setAttribute("href", "#");
+        btn.setAttribute("id", "delete");
+        btn.setAttribute('onclick','deletedrink()');
+        btn.innerHTML = "DELETE";
+        document.querySelector(".popup").style.display = "flex";
+        document.getElementById("popupcontent").appendChild(btn);
+
+        var btn2 = document.createElement("a");
+        btn2.setAttribute("class", "button");
+        btn2.setAttribute("href", "#");
+        btn2.setAttribute("id", "put");
+        btn2.setAttribute('onclick','editdrink()');
+        btn2.innerHTML = "PUT";
+        document.getElementById("popupcontent").appendChild(btn2);
+    }
+
+
+    function deletedrink() {
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            }
+        }
+        xmlhttp.open("DELETE", "http://localhost:3000/Cocktails/" + myArr[id]._id, true);
+        xmlhttp.send();
+
+        location.reload(true);
+
+    }
+    function newdrink() {
+
+        var nimi = document.getElementById("nimi").value;
+        var kuvannimi = document.getElementById("kuvannimi").value;
+        var ohje = document.getElementById("ohje").value;
+        var newAinesosa1 = document.getElementById("ainesosa1").value;
+        var maara1 = document.getElementById("maara1").value;
+        var mitta1 = document.getElementById("mitta1").value;
+        var newAinesosa2 = document.getElementById("ainesosa2").value;
+        var maara2 = document.getElementById("maara2").value;
+        var mitta2 = document.getElementById("mitta2").value;
+        var newAinesosa3 = document.getElementById("ainesosa3").value;
+        var maara3 = document.getElementById("maara3").value;
+        var mitta3 = document.getElementById("mitta3").value;
+        var newAinesosa4 = document.getElementById("ainesosa4").value;
+        var maara4 = document.getElementById("maara4").value;
+        var mitta4 = document.getElementById("mitta4").value;
+
+        if (nimi && kuvannimi && ohje && newAinesosa1 && maara1 && mitta1 && newAinesosa2 && maara2 && mitta2 && newAinesosa3 && maara3 && mitta3 && newAinesosa4 && maara4 && mitta4) {
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                }
+            }
+            xmlhttp.open("POST", url, true);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send("nimi=" + nimi + "&kuvanimi=" + kuvannimi + "&ohje=" + ohje + "&ainesosat[ainesosa1][mitä]=" + newAinesosa1 + "&ainesosat[ainesosa1][määrä]=" + maara1 + "&ainesosat[ainesosa1][mitta]=" + mitta1 + "&ainesosat[ainesosa2][mitä]=" + newAinesosa2 + "&ainesosat[ainesosa2][määrä]=" + maara2 + "&ainesosat[ainesosa2][mitta]=" + mitta2 + "&ainesosat[ainesosa3][mitä]=" + newAinesosa3 + "&ainesosat[ainesosa3][määrä]=" + maara3 + "&ainesosat[ainesosa3][mitta]=" + mitta3 + "&ainesosat[ainesosa4][mitä]=" + newAinesosa4 + "&ainesosat[ainesosa4][määrä]=" + maara4 + "&ainesosat[ainesosa4][mitta]=" + mitta4);
+
+            location.reload(true);
+            document.getElementById("post").addEventListener("click", function () {
+                document.querySelector(".popup").style.display = "none";
+            })
+        }
+        else {
+            //alert(nimi + " " + kuvannimi + " " + ohje + " " + newAinesosa1 + " " + maara1 + " " + mitta1 + " " + newAinesosa2 + " " + maara2 + " " + mitta2 + " " + newAinesosa3 + " " + maara3 + " " + mitta3 + " " + newAinesosa4 + " " + maara4 + " " + mitta4)
+            alert("Täytä kaikki kentät, huom. määrä täytyy olla koko luku")
+        }
+    }
+    function tekstit()
+    {
+        popupdelete();
+        id = this.id.replace("ul","");
+        document.querySelector(".popup").style.display = "flex";
+
+        document.getElementById("nimi").value = myArr[id].nimi;
+        document.getElementById("kuvannimi").value = myArr[id].kuvanimi;
+        document.getElementById("ohje").value = myArr[id].ohje;
+        document.getElementById("ainesosa1").value = myArr[id].ainesosat[0].ainesosa1[0].mitä;
+        document.getElementById("maara1").value = myArr[id].ainesosat[0].ainesosa1[0].määrä;
+        document.getElementById("mitta1").value = myArr[id].ainesosat[0].ainesosa1[0].mitta;
+        document.getElementById("ainesosa2").value = myArr[id].ainesosat[0].ainesosa2[0].mitä;
+        document.getElementById("maara2").value = myArr[id].ainesosat[0].ainesosa2[0].määrä;
+        document.getElementById("mitta2").value = myArr[id].ainesosat[0].ainesosa2[0].mitta;
+        document.getElementById("ainesosa3").value = myArr[id].ainesosat[0].ainesosa3[0].mitä;
+        document.getElementById("maara3").value = myArr[id].ainesosat[0].ainesosa3[0].määrä;
+        document.getElementById("mitta3").value = myArr[id].ainesosat[0].ainesosa3[0].mitta;
+        document.getElementById("ainesosa4").value = myArr[id].ainesosat[0].ainesosa4[0].mitä;
+        document.getElementById("maara4").value = myArr[id].ainesosat[0].ainesosa4[0].määrä;
+        document.getElementById("mitta4").value = myArr[id].ainesosat[0].ainesosa4[0].mitta;
+
+    }
+
+    function myFunction(arr) {
+        //document.getElementById("center").innerHTML = "";
+        var i;
+        var ainesosatArr = [];
+
+        for(i=0; i < arr.length; i++){
+
+            var ainesosa1 = arr[i].ainesosat[0].ainesosa1[0].mitä + " "+ arr[i].ainesosat[0].ainesosa1[0].määrä + " " + arr[i].ainesosat[0].ainesosa1[0].mitta;
+            var ainesosa2 = arr[i].ainesosat[0].ainesosa2[0].mitä + " "+ arr[i].ainesosat[0].ainesosa2[0].määrä + " " + arr[i].ainesosat[0].ainesosa2[0].mitta;
+            var ainesosa3 = arr[i].ainesosat[0].ainesosa3[0].mitä + " "+ arr[i].ainesosat[0].ainesosa3[0].määrä + " " + arr[i].ainesosat[0].ainesosa3[0].mitta;
+            var ainesosa4 = arr[i].ainesosat[0].ainesosa4[0].mitä + " "+ arr[i].ainesosat[0].ainesosa4[0].määrä + " " + arr[i].ainesosat[0].ainesosa4[0].mitta;
+            //var ainesosa5 = arr[i].ainesosat[0].ainesosa5[0].mitä + " "+ arr[i].ainesosat[0].ainesosa5[0].määrä + " " + arr[i].ainesosat[0].ainesosa5[0].mitta;
+           /* var ainesosa6 = arr[i].ainesosat[0].ainesosa6[0].mitä + " "+ arr[i].ainesosat[0].ainesosa6[0].määrä + " " + arr[i].ainesosat[0].ainesosa6[0].mitta;
+            var ainesosa7 = arr[i].ainesosat[0].ainesosa7[0].mitä + " "+ arr[i].ainesosat[0].ainesosa7[0].määrä + " " + arr[i].ainesosat[0].ainesosa7[0].mitta;
+            var ainesosa8 = arr[i].ainesosat[0].ainesosa8[0].mitä + " "+ arr[i].ainesosat[0].ainesosa8[0].määrä + " " + arr[i].ainesosat[0].ainesosa8[0].mitta;
+            var ainesosa9 = arr[i].ainesosat[0].ainesosa9[0].mitä + " "+ arr[i].ainesosat[0].ainesosa9[0].määrä + " " + arr[i].ainesosat[0].ainesosa9[0].mitta;
+            var ainesosa10 = arr[i].ainesosat[0].ainesosa10[0].mitä + " "+ arr[i].ainesosat[0].ainesosa10[0].määrä + " " + arr[i].ainesosat[0].ainesosa10[0].mitta;*/
+
+           ul = document.createElement('ul');
+           ul.setAttribute("id","ul" + i);
+            var center = document.getElementById('center'),
+            li = document.createElement('li'),
+             clone;
+           ["Nimi:  " + arr[i].nimi, "Ainesosa:  "+ainesosa1, "Ainesosa:  "+ainesosa2, "Ainesosa:  "+ainesosa3, "Ainesosa:  "+ainesosa4, "Ohje:  " + arr[i].ohje].forEach(function (osa, index) {
+             clone = li.cloneNode();
+             clone.textContent = osa;
+            ul.appendChild(clone);
+            center.appendChild(ul);
+
+               document.getElementById("ul" + i).addEventListener("click", tekstit);
+
+            });
+        }
+    }
+    function editdrink() {
+
+        var nimi = document.getElementById("nimi").value;
+        var kuvannimi = document.getElementById("kuvannimi").value;
+        var ohje = document.getElementById("ohje").value;
+        var newAinesosa1 = document.getElementById("ainesosa1").value;
+        var maara1 = document.getElementById("maara1").value;
+        var mitta1 = document.getElementById("mitta1").value;
+        var newAinesosa2 = document.getElementById("ainesosa2").value;
+        var maara2 = document.getElementById("maara2").value;
+        var mitta2 = document.getElementById("mitta2").value;
+        var newAinesosa3 = document.getElementById("ainesosa3").value;
+        var maara3 = document.getElementById("maara3").value;
+        var mitta3 = document.getElementById("mitta3").value;
+        var newAinesosa4 = document.getElementById("ainesosa4").value;
+        var maara4 = document.getElementById("maara4").value;
+        var mitta4 = document.getElementById("mitta4").value;
+
+        if (nimi && kuvannimi && ohje && newAinesosa1 && maara1 && mitta1 && newAinesosa2 && maara2 && mitta2 && newAinesosa3 && maara3 && mitta3 && newAinesosa4 && maara4 && mitta4) {
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                }
+            }
+            xmlhttp.open("PUT", url + "/" +myArr[id]._id, true);
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send("nimi=" + nimi + "&kuvanimi=" + kuvannimi + "&ohje=" + ohje + "&ainesosat[ainesosa1][mitä]=" + newAinesosa1 + "&ainesosat[ainesosa1][määrä]=" + maara1 + "&ainesosat[ainesosa1][mitta]=" + mitta1 + "&ainesosat[ainesosa2][mitä]=" + newAinesosa2 + "&ainesosat[ainesosa2][määrä]=" + maara2 + "&ainesosat[ainesosa2][mitta]=" + mitta2 + "&ainesosat[ainesosa3][mitä]=" + newAinesosa3 + "&ainesosat[ainesosa3][määrä]=" + maara3 + "&ainesosat[ainesosa3][mitta]=" + mitta3 + "&ainesosat[ainesosa4][mitä]=" + newAinesosa4 + "&ainesosat[ainesosa4][määrä]=" + maara4 + "&ainesosat[ainesosa4][mitta]=" + mitta4);
+
+            location.reload(true);
+            document.getElementById("post").addEventListener("click", function () {
+                document.querySelector(".popup").style.display = "none";
+            })
+        }
+    }
+</script>
+</body>
+</html>
