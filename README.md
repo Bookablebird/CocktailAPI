@@ -1,89 +1,200 @@
 # CocktailAPI
 Request & Response Examples
-API Resources
-GET /magazines
-GET /magazines/[id]
-POST /magazines/[id]/articles
-GET /magazines
-Example: http://example.gov/api/v1/magazines.json
+GET /Cocktails
+GET /Cocktails/[id]
+POST /Cocktails
+PUT /Cocktails/[id]
+DELETE /Cocktails/[id]
+
+##GET /Cocktails
+Example: http://localhost:3000/Cocktails
 
 Response body:
 
 {
-    "metadata": {
-        "resultset": {
-            "count": 123,
-            "offset": 0,
-            "limit": 10
-        }
-    },
-    "results": [
-        {
-            "id": "1234",
-            "type": "magazine",
-            "title": "Public Water Systems",
-            "tags": [
-                {"id": "125", "name": "Environment"},
-                {"id": "834", "name": "Water Quality"}
-            ],
-            "created": "1231621302"
-        },
-        {
-            "id": 2351,
-            "type": "magazine",
-            "title": "Public Schools",
-            "tags": [
-                {"id": "125", "name": "Elementary"},
-                {"id": "834", "name": "Charter Schools"}
-            ],
-            "created": "126251302"
-        }
-        {
-            "id": 2351,
-            "type": "magazine",
-            "title": "Public Schools",
-            "tags": [
-                {"id": "125", "name": "Pre-school"},
-            ],
-            "created": "126251302"
-        }
-    ]
-}
-GET /magazines/[id]
-Example: http://example.gov/api/v1/magazines/[id].json
+        "_id": "5e691bfec988e448883e18b2",
+        "nimi": "Alien Brain Hemorrhage",
+        "kuvanimi": "alienbrainhemorrhage.png",
+        "ohje": "Kaada shottilasi n. puolilleen persikkalikööriä, minkä jälkeen varovasti baileys päälle. Jätä tilaa curacaolle ja grenadiilille. Kun kermalikööri on tasaantunut, lorauta curacao baileysin päälle ja lopuksi grenadiini keskelle shottilasia. Grenadiinin massan vuoksi aine putoaa pohjaan luoden tunnusomaisen effektinsä.",
+        "ainesosat": [
+            {
+                "ainesosa1": [
+                    {
+                        "_id": "5e6a31a45fde2c3a1405a03e",
+                        "mitä": "Persikkalikööri",
+                        "määrä": 20,
+                        "mitta": "ml"
+                    }
+                ],
+                "ainesosa2": [
+                    {
+                        "_id": "5e6a31a45fde2c3a1405a03f",
+                        "mitä": "Kermalikööri",
+                        "määrä": 20,
+                        "mitta": "ml"
+                    }
+                ],
+                "ainesosa3": [
+                    {
+                        "_id": "5e6a31a45fde2c3a1405a040",
+                        "mitä": "Curacaolikööri",
+                        "määrä": 5,
+                        "mitta": "ml"
+                    }
+                ],
+                "ainesosa4": [
+                    {
+                        "_id": "5e6a31a45fde2c3a1405a041",
+                        "mitä": "Grenadiini",
+                        "määrä": 1,
+                        "mitta": "Dash"
+                    }
+                ],
+                "ainesosa5": [],
+                "ainesosa6": [],
+                "ainesosa7": [],
+                "ainesosa8": [],
+                "ainesosa9": [],
+                "ainesosa10": [],
+                "_id": "5e6a31a45fde2c3a1405a03d"
+            }
+        ],
+        "__v": 0
+    }
+##GET /Cocktails/[id]
+Example: http://localhost:3000/Cocktails/5e69393fc988e448883e18c4
 
 Response body:
 
 {
-    "id": "1234",
-    "type": "magazine",
-    "title": "Public Water Systems",
-    "tags": [
-        {"id": "125", "name": "Environment"},
-        {"id": "834", "name": "Water Quality"}
+    "_id": "5e69393fc988e448883e18c4",
+    "nimi": "Kuolema",
+    "kuvanimi": "kuolema.png",
+    "ohje": "Sekoita hyvin",
+    "ainesosat": [
+        {
+            "ainesosa1": [
+                {
+                    "_id": "5e6a34a75fde2c3a1405a049",
+                    "mitä": "Bratva",
+                    "määrä": 1,
+                    "mitta": "l"
+                }
+            ],
+            "ainesosa2": [
+                {
+                    "_id": "5e6a34a75fde2c3a1405a04a",
+                    "mitä": "Bacardi 151",
+                    "määrä": 50,
+                    "mitta": "cl"
+                }
+            ],
+            "ainesosa3": [
+                {
+                    "_id": "5e6a34a75fde2c3a1405a04b",
+                    "mitä": "Tequila",
+                    "määrä": 400,
+                    "mitta": "ml"
+                }
+            ],
+            "ainesosa4": [
+                {
+                    "_id": "5e6a34a75fde2c3a1405a04c",
+                    "mitä": "Absintti",
+                    "määrä": 5,
+                    "mitta": "Shottia"
+                }
+            ],
+            "ainesosa5": [],
+            "ainesosa6": [],
+            "ainesosa7": [],
+            "ainesosa8": [],
+            "ainesosa9": [],
+            "ainesosa10": [],
+            "_id": "5e6a34a75fde2c3a1405a048"
+        }
     ],
-    "created": "1231621302"
+    "__v": 0
 }
-POST /magazines/[id]/articles
-Example: Create – POST http://example.gov/api/v1/magazines/[id]/articles
+##POST /Cocktails/
+Example: Create – POST http://localhost:3000/Cocktails/nimi=testi&kuvanimi=testi&ohje=testi&ainesosat[ainesosa1][mitä]=testi&ainesosat[ainesosa1][määrä]=100&ainesosat[ainesosa1][mitta]=ml
 
 Request body:
 
-[
-    {
-        "title": "Raising Revenue",
-        "author_first_name": "Jane",
-        "author_last_name": "Smith",
-        "author_email": "jane.smith@example.gov",
-        "year": "2012",
-        "month": "August",
-        "day": "18",
-        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ante ut augue scelerisque ornare. Aliquam tempus rhoncus quam vel luctus. Sed scelerisque fermentum fringilla. Suspendisse tincidunt nisl a metus feugiat vitae vestibulum enim vulputate. Quisque vehicula dictum elit, vitae cursus libero auctor sed. Vestibulum fermentum elementum nunc. Proin aliquam erat in turpis vehicula sit amet tristique lorem blandit. Nam augue est, bibendum et ultrices non, interdum in est. Quisque gravida orci lobortis... "
+{
+        "_id": "5e691bfec988e448883e18c",
+        "nimi": "testi",
+        "kuvanimi": "testi",
+        "ohje": "testi",
+        "ainesosat": [
+            {
+                "ainesosa1": [
+                    {
+                        "_id": "5e6a31a45fde2c3a1405a01b",
+                        "mitä": "testi",
+                        "määrä": 100,
+                        "mitta": "ml"
+                    }
+                ],
+                "ainesosa2": [],
+                "ainesosa3": [],
+                "ainesosa4": [],
+                "ainesosa5": [],
+                "ainesosa6": [],
+                "ainesosa7": [],
+                "ainesosa8": [],
+                "ainesosa9": [],
+                "ainesosa10": [],
+                "_id": "5e6a31a45fde2c3a1405a01a"
+            }
+        ],
+        "__v": 0
     }
-]
-Mock Responses
-It is suggested that each resource accept a 'mock' parameter on the testing server. Passing this parameter should return a mock data response (bypassing the backend).
+    
+    ##PUT /Cocktails/[id]
+    Example: http://localhost:3000/Cocktails/5e69393fc988e448883e18c4?nimi=testi1&ohje=Sekoita hyvin
+    
+    Request body:
 
-Implementing this feature early in development ensures that the API will exhibit consistent behavior, supporting a test driven development methodology.
+{
+        "_id": "5e691bfec988e448883e18c",
+        "nimi": "testi1",
+        "kuvanimi": "testi",
+        "ohje": "Sekoita hyvin",
+        "ainesosat": [
+            {
+                "ainesosa1": [
+                    {
+                        "_id": "5e6a31a45fde2c3a1405a01b",
+                        "mitä": "testi",
+                        "määrä": 100,
+                        "mitta": "ml"
+                    }
+                ],
+                "ainesosa2": [],
+                "ainesosa3": [],
+                "ainesosa4": [],
+                "ainesosa5": [],
+                "ainesosa6": [],
+                "ainesosa7": [],
+                "ainesosa8": [],
+                "ainesosa9": [],
+                "ainesosa10": [],
+                "_id": "5e6a31a45fde2c3a1405a01a"
+            }
+        ],
+        "__v": 0
+    }
+    
+    ##DELETE /Cocktails/[id]
+    
+    Example: http://localhost:3000/Cocktails/5e69393fc988e448883e18c4
+    
+    Response body:
 
-Note: If the mock parameter is included in a request to the production environment, an error should be raised.
+{
+    "message": "Cocktail successfully deleted"
+}
+    
+
+    
