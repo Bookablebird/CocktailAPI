@@ -6,7 +6,7 @@ Example: http://localhost:3000/Cocktails
 
 Response body:
 
-{
+        {
         "_id": "5e691bfec988e448883e18b2",
         "nimi": "Alien Brain Hemorrhage",
         "kuvanimi": "alienbrainhemorrhage.png",
@@ -61,7 +61,7 @@ Example: http://localhost:3000/Cocktails/5e69393fc988e448883e18c4
 
 Response body:
 
-{
+        {
     "_id": "5e69393fc988e448883e18c4",
     "nimi": "Kuolema",
     "kuvanimi": "kuolema.png",
@@ -116,7 +116,7 @@ Example: Create – POST http://localhost:3000/Cocktails/nimi=testi&kuvanimi=tes
 
 Request body:
 
-{
+        {
         "_id": "5e691bfec988e448883e18c",
         "nimi": "testi",
         "kuvanimi": "testi",
@@ -151,7 +151,7 @@ Example: http://localhost:3000/Cocktails/5e69393fc988e448883e18c4?nimi=testi1&oh
     
 Request body:
 
-{
+        {
         "_id": "5e691bfec988e448883e18c",
         "nimi": "testi1",
         "kuvanimi": "testi",
@@ -187,9 +187,9 @@ Example: http://localhost:3000/Cocktails/5e69393fc988e448883e18c4
     
 Response body:
 
-{
+        {
     "message": "Cocktail successfully deleted"
-}
+        }
     
 
     
