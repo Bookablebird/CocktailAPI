@@ -8,7 +8,7 @@ var express = require('express'),
   
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/Tododb'); 
+mongoose.connect('mongodb://localhost:27017/Cocktail'); 
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
